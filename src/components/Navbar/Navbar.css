@@ -1,0 +1,290 @@
+/* General Styles */
+
+/* Profile Container */
+.profile-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-container .profile {
+  color: #000000;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.profile:hover {
+  padding-left: 15px;
+  padding-right: 15px;
+  transition: 0.9s;
+} 
+
+.profile-icon {
+  color: #000000; /* Icon color */
+  font-size: 22px;
+  margin-left: 5px;
+}
+
+/* Profile Menu */
+.profile-menu {
+  position: absolute;
+  top: 60px;
+  left: 50%; /* Center relative to parent */
+  transform: translateX(-80%); /* Shift left by half its width */
+ background-color: #04212e;
+ 
+  color: #fffdfd;
+  border: 3px solid #ffffff;
+  border-radius: 20px;
+  width: 350px;
+  box-shadow: 5px 5px 30px rgb(255, 255, 255);
+  z-index: 1000;
+  padding: 10px;
+}
+
+/* Profile Menu Items */
+.profile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-menu li {
+  padding: 12px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  border-bottom: 1px solid #c7c3c3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s ease;
+}
+
+/* Last item (e.g., Sign Out) styling */
+.profile-menu li:nth-last-child(3) {
+  font-weight: 600; /* Bold text */
+
+  color: #db2424; /* Customize color, e.g., Steel Blue */
+  border-bottom: none; /* Customize as needed */
+}
+.profile-menu li:nth-last-child(2) {
+  font-weight: 600; /* Increase font weight */
+  color:  #ffffff;  /* Choose a color like orange */
+  border-bottom: none; /* Customize as needed */
+}
+.profile-menu li:last-child {
+  border-bottom: none;
+  font-weight: 600;
+
+  
+  color: #14c414; /* Tomato red for Sign Out */
+}
+
+
+/* Hover Effect */
+.profile-menu li:hover {
+  background-color: #fcfcfc;
+  color: rgb(0, 0, 0); /* Gold on hover */
+  
+  
+  border-radius: 20px;
+  padding: 10px 10px;
+}
+
+/* Optional icon styling */
+.profile-menu li i {
+  font-size: 18px;
+  
+}
+
+
+/*navbar */
+.navbar-expand-lg {
+  border-radius: 40px; /* Ensure this has a unit */
+}
+
+.form-control {
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+/* Navbar Styles */
+.navbar-content-container {
+  border: 3px solid rgb(255, 246, 246);
+  border-radius: 40px;
+  background: radial-gradient(circle at center, 
+  cyan, rgb(113, 168, 241), cyan),50% ; /* Use linear gradient instead of background-color */
+  text-align: center;
+  max-width: 800px;
+
+  margin: 15px auto;
+  display: flex;
+  flex-direction: column; /* Align items in a column */
+  align-items: center; /* Center items horizontally */
+  padding: 5px; /* Add padding for better spacing */
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  flex-wrap: wrap; /* Wrap items if there's not enough space */
+}
+
+.nav-item {
+  margin-right: 20px; /* Space between nav items */
+}
+
+/* Nav Link Styles */
+
+/* Dropdown Menu Styles */
+.navbar-content-container .dropdown-menu {
+  background: linear-gradient(90deg, #3e8cc4, #ab0c9b);
+  border-radius: 15px; /* Increased border-radius for a more rounded look */
+  padding: 8px 0;
+  box-shadow: 0px 4px 8px rgb(255, 255, 255);
+  min-width: 200px;
+  font-weight: 100;
+  border:white;
+
+
+}
+
+.navbar-content-container .dropdown-item {
+  color: #ffffff;
+  font-weight: bold;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 10px; /* Rounded corners for dropdown items */
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.navbar-content-container .dropdown-item:hover {
+  background: linear-gradient(90deg, #FDA085, #F6D365);
+  color: #030303;
+  transform: translateX(5px);
+}
+
+.navbar-content-container .dropdown-divider {
+  background-color: #6FD6FF;
+  opacity: 0.7;
+  margin: 4px 0;
+  height: 1px;
+}
+
+.nav-item .dropdown-toggle {
+  color: #1E1E1E;
+  font-weight: bold; /* Default color */
+  font-size: 18px;
+}
+
+.nav-item .dropdown-toggle:hover {
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  background-color: rgb(60, 69, 163);
+  color: #ffffff;
+  padding-left: 35px;
+  padding-right: 35px;
+  transition: 0.6s;
+}
+
+/* Job Description Page Styles */
+.job-description-page-link {
+  color: white; /* Default color */
+  font-size: 15px;
+}
+
+.job-description-page-link:hover {
+  border: none; /* Remove border */
+  border-radius: 30px; /* Rounded corners */
+  font-weight: bold; /* Make text bold */
+  background-color: rgb(95, 19, 19); /* Change background on hover */
+  color: white; /* Change text color on hover */
+}
+
+/* Button Styles */
+.upload-resume-button {
+ /* Remove border */
+  border-radius: 60px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #3e8cc4, #ab0c9b);
+  color: rgb(255, 255, 255);
+  margin-right: 6px;
+  padding: 5px 15px; /* Add padding for better click area */
+  border:2px  rgb(255, 236, 236);
+  box-shadow: 2px 3px 15px rgb(240, 237, 237);
+}
+
+.upload-resume-button:hover {
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #3e8cc4, #ab0c9b); /* Change to violet on hover */
+  color: white;
+  transition: 0.9s; 
+  border-radius: 30px;
+  font-weight: bold;
+  padding-left: 35px;
+  padding-right: 35px;
+
+}
+.submit-resume-button{
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #3e8cc4, #ab0c9b); /* Change to violet on hover */
+  color: white;
+  transition: 0.9s; 
+  border-radius: 30px;
+  font-weight: bold;
+  padding-left: 35px;
+  padding-right: 35px;  /* Add padding for better click area */
+} /* Add padding for better click area */
+
+.submit-resume-button:hover{
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #3e8cc4, #ab0c9b); /* Change to violet on hover */
+  color: white;
+  transition: 0.9s; 
+  border-radius: 30px;
+  font-weight: bold;
+  padding-left: 35px;
+  padding-right: 35px; 
+}
+/* Navbar.css */
+
+.custom-spinner {
+  color: rgb(255, 255, 255); /* Customize spinner color */
+  width: 2rem; /* Adjust width for size */
+  height: 2rem; /* Adjust height for size */
+  border-width: 10px; /* Increase border width for a thicker spinner */
+  background-color: black;
+}
+
+.custom-visually-hidden {
+  display: none;
+}
+
+
+
+/* Thick Underline for Profile */
+.thick-underline {
+  position: relative; /* Needed for absolute positioning of the pseudo-element */
+  
+}
+
+.thick-underline:after {
+  
+  content: ''; /* Required for pseudo-elements */
+  display: block;
+  width: 100%; /* Make it the full width of the text */
+  height: 4px; /* Adjust thickness here */
+  background: white; /* Color of the underline */
+  position: absolute;
+  bottom: -2px; /* Adjusts the position of the underline */
+  left: 0; /* Aligns it to the left */
+}
