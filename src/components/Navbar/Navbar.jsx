@@ -1,18 +1,19 @@
 import React, { useRef, useState } from 'react';
 import SMlogo from '../../assets/SMlogo.png';
 import { FaUser, FaEnvelope, FaPhone, FaBuilding, FaCog, FaSignOutAlt, FaSignInAlt } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 import './Navbar.css';
+import axios from 'axios';
 
-const Navbar = ({ onComponentChange, handleResumeUpload }) => {
+const Navbar = ({ onComponentChange }) => {
   const fileInputRef = useRef(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
+  // New Upload Resume Functionality
   const handleFileSelect = (event) => {
-    const newFiles = Array.from(event.target.files);
-    setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
+    const file = event.target.files[0];
+    setSelectedFiles(file); // Capture a single file for upload
   };
 
   const handleUploadClick = () => {
@@ -20,18 +21,24 @@ const Navbar = ({ onComponentChange, handleResumeUpload }) => {
   };
 
   const handleSubmitFiles = async () => {
-    if (selectedFiles.length === 0) {
-      console.warn("No files selected for submission.");
+    if (!selectedFiles) {
+      console.warn("No file selected for submission.");
       return;
     }
 
     setLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate loading delay
-      console.log("Submitting selected files:", selectedFiles);
-      handleResumeUpload(selectedFiles); // Pass files to App.js
-      setSelectedFiles([]); // Clear the files after upload
+      const formData = new FormData();
+      formData.append("title", "Uploaded Resume"); // Example title
+      formData.append("file", selectedFiles);
+
+      const result = await axios.post("http://localhost:5000/upload-files", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      console.log("File submission result:", result);
+      setSelectedFiles(null); // Clear the selected file after upload
     } catch (error) {
       console.error("File submission failed:", error);
     } finally {
@@ -42,8 +49,6 @@ const Navbar = ({ onComponentChange, handleResumeUpload }) => {
   const toggleProfileMenu = () => {
     setShowProfileMenu((prev) => !prev);
   };
-
-  const navigate = useNavigate();
 
   return (
     <nav className="navbar navbar-expand-lg">
@@ -62,28 +67,6 @@ const Navbar = ({ onComponentChange, handleResumeUpload }) => {
             alt="Logo"
           />
         </span>
-
-        {/* <div className="profile-container" onClick={toggleProfileMenu}>
-          <span style={{ color: "black", fontSize: '20px', fontWeight: 'bold' }} className="profile d-flex align-items-center thick-underline">
-            <FaUser style={{ marginRight: '10px' }} className="profile-icon" />
-            Profile
-          </span>
-
-          {showProfileMenu && (
-            <div className="profile-menu">
-              <ul>
-                <li><FaUser /> Name: Ganga</li>
-                <li><FaEnvelope /> Email: ganga@example.com</li>
-                <li><FaPhone /> Contact: +1234567890</li>
-                <li><FaBuilding /> Company: Example Inc.</li>
-                <li onClick={() => alert('Open Settings')}><FaCog /> Settings</li>
-                <li onClick={() => alert('Sign Out')}><FaSignOutAlt /> Sign Out</li>
-                <li>Or</li>
-                <li onClick={() => alert('Sign in another account')}><FaSignInAlt /> Sign in another account</li>
-              </ul>
-            </div>
-          )}
-        </div> */}
 
         <div className="navbar-content-container">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -118,6 +101,7 @@ const Navbar = ({ onComponentChange, handleResumeUpload }) => {
               </ul>
             </li>
 
+            {/* Updated Upload Resume Button */}
             <button
               className="upload-resume-button"
               onClick={handleUploadClick}
@@ -125,10 +109,11 @@ const Navbar = ({ onComponentChange, handleResumeUpload }) => {
               Upload Resume
             </button>
 
+            {/* Updated Submit Button */}
             <button
               className="submit-resume-button btn btn-primary"
               onClick={handleSubmitFiles}
-              style={{ 
+              style={{
                 marginLeft: '10px',
                 backgroundColor: '#4CAF50',
                 borderColor: '#4CAF50',
@@ -153,14 +138,16 @@ const Navbar = ({ onComponentChange, handleResumeUpload }) => {
               ref={fileInputRef}
               style={{ display: 'none' }}
               onChange={handleFileSelect}
-              accept=".pdf,.doc,.docx"
-              multiple
+              accept=".pdf"
             />
           </ul>
         </div>
 
         <div className="profile-container" onClick={toggleProfileMenu}>
-          <span style={{ color: "black", fontSize: '20px', fontWeight: 'bold' }} className="profile d-flex align-items-center thick-underline">
+          <span
+            style={{ color: "black", fontSize: '20px', fontWeight: 'bold' }}
+            className="profile d-flex align-items-center thick-underline"
+          >
             <FaUser style={{ marginRight: '10px' }} className="profile-icon" />
             Profile
           </span>

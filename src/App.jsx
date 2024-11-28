@@ -12,7 +12,8 @@ function App() {
     formData.append("title",title);
     formData.append("file",file);
     console.log(title,file)
-    const result = await axios.post("http://localhost:5000/upload-files",
+    const result = await axios.post(
+    "http://localhost:5000/upload-files",
       formData,
     {
      headers: {"Content-Type": "multipart/form-data"},
@@ -46,7 +47,11 @@ return (
 
 }
 export default App;
-*/import React, { useState } from 'react';
+
+*/
+
+
+import React, { useState } from 'react';
 import axios from 'axios';
 
 import './App.css';
@@ -71,27 +76,9 @@ function App() {
     }
   };  
 
-
-
-  const[title,setTitle]=useState("");
-  const[file,setFile]=useState("");
-  const submitImage=async(e)=>{
-    e.preventDefault();
-    const formData=new FormData();
-    formData.append("title",title);
-    formData.append("file",file);
-    console.log(title,file)
-    const result = await axios.post("http://localhost:5000/upload-files",
-      formData,
-    {
-     headers: {"Content-Type": "multipart/form-data"},
-    });
-console.log(result);
-  };
-
   return (
     <Router>
-      <div className='APPA' style={{ overflowY: 'auto', height: '100vh', backgroundColor:'#d16501' }}>
+      <div className='APPA' style={{ overflowY: 'auto', height: '100vh', background:'linear-gradient(359deg, rgb(20 10 44), rgb(27 107 165'}}>
         <Navbar onComponentChange={handleComponentChange} handleResumeUpload={handleResumeUpload} />
         <Sidebar onComponentChange={handleComponentChange} />
 
@@ -108,29 +95,11 @@ console.log(result);
           <Route path="/job-description/edit" element={<EditJobDescription />} />
         </Routes>
         <div className='App'>
-  <form className='formStyle' onSubmit={submitImage}>
-    <input type='text'
-        className='form-control' 
-        placeholder='Title' 
-        required
-        onChange={(e)=>setTitle(e.target.value)}
-        />
-    <input type = "file" 
-        className='form-control' 
-        accept="application/pdf" 
-        required
-        onChange={(e)=>setFile(e.target.files[0])}
-        />
-    <button className='btn btn-primary' 
-        type="submit">
-      Submit
-    </button>
-
-  </form>
+ 
 </div>
       </div>
     </Router>
   );
 }
 
-export default App;
+export default App; 

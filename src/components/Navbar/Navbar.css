@@ -99,6 +99,7 @@
 
 
 /*navbar */
+
 .navbar-expand-lg {
   border-radius: 40px; /* Ensure this has a unit */
 }
@@ -110,18 +111,19 @@
 
 /* Navbar Styles */
 .navbar-content-container {
-  border: 3px solid rgb(255, 246, 246);
-  border-radius: 40px;
-  background: radial-gradient(circle at center, 
-  cyan, rgb(113, 168, 241), cyan),50% ; /* Use linear gradient instead of background-color */
+
+  border-radius: 50px;
+  background: radial-gradient(circle at center, #0c0921, rgb(56 28 93), #2a0b4e), 50%;
   text-align: center;
   max-width: 800px;
-
   margin: 15px auto;
   display: flex;
-  flex-direction: column; /* Align items in a column */
-  align-items: center; /* Center items horizontally */
-  padding: 5px; /* Add padding for better spacing */
+  box-shadow: 2px 2px 5px rgb(214, 200, 200);
+
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  flex-wrap: wrap;
 }
 
 .navbar-nav {
@@ -139,13 +141,13 @@
 
 /* Dropdown Menu Styles */
 .navbar-content-container .dropdown-menu {
-  background: linear-gradient(90deg, #3e8cc4, #ab0c9b);
-  border-radius: 15px; /* Increased border-radius for a more rounded look */
+  background: linear-gradient(268deg, #194564, #27043a);
+  border-radius: 15px;
   padding: 8px 0;
-  box-shadow: 0px 4px 8px rgb(255, 255, 255);
+  box-shadow: 0px 4px 8px rgb(54 6 6);
   min-width: 200px;
   font-weight: 100;
-  border:white;
+  border: #000000;
 
 
 }
@@ -174,17 +176,23 @@
 }
 
 .nav-item .dropdown-toggle {
-  color: #1E1E1E;
-  font-weight: bold; /* Default color */
-  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+  color: #000000;
+  padding-left: 35px;
+  padding-right: 35px;
+  transition: 0.6s;
+  padding-left: 3.5rem;
 }
 
 .nav-item .dropdown-toggle:hover {
   border: none;
   border-radius: 30px;
   font-weight: bold;
-  background-color: rgb(60, 69, 163);
-  color: #ffffff;
+  background-color: rgb(255, 255, 255);
+  color: #000000;
   padding-left: 35px;
   padding-right: 35px;
   transition: 0.6s;
@@ -207,21 +215,20 @@
 /* Button Styles */
 .upload-resume-button {
  /* Remove border */
-  border-radius: 60px;
-  font-weight: bold;
-  background: linear-gradient(90deg, #3e8cc4, #ab0c9b);
-  color: rgb(255, 255, 255);
-  margin-right: 6px;
-  padding: 5px 15px; /* Add padding for better click area */
-  border:2px  rgb(255, 236, 236);
-  box-shadow: 2px 3px 15px rgb(240, 237, 237);
+ border-radius: 60px;
+ font-weight: bold;
+ background: linear-gradient(351deg, #0d1c26, #ad8eaa);
+ color: rgb(255, 255, 255);
+ margin-right: 6px;
+ padding: 5px 15px;
+ border: 2px rgb(255, 236, 236);
+ box-shadow: 2px 2px 3px rgb(2 8 10);
 }
 
 .upload-resume-button:hover {
   border: none;
   border-radius: 30px;
-  font-weight: bold;
-  background: linear-gradient(90deg, #3e8cc4, #ab0c9b); /* Change to violet on hover */
+  background: linear-gradient(351deg,#ad8eaa , #0d1c26); /* Change to violet on hover */
   color: white;
   transition: 0.9s; 
   border-radius: 30px;
