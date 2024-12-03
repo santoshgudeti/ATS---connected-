@@ -1,56 +1,4 @@
 
-/*
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-
-function App() {
-  const[title,setTitle]=useState("");
-  const[file,setFile]=useState("");
-  const submitImage=async(e)=>{
-    e.preventDefault();
-    const formData=new FormData();
-    formData.append("title",title);
-    formData.append("file",file);
-    console.log(title,file)
-    const result = await axios.post(
-    "http://localhost:5000/upload-files",
-      formData,
-    {
-     headers: {"Content-Type": "multipart/form-data"},
-    });
-console.log(result);
-  };
-
-return (
-<div className='App'>
-  <form className='formStyle' onSubmit={submitImage}>
-    <input type='text'
-        className='form-control' 
-        placeholder='Title' 
-        required
-        onChange={(e)=>setTitle(e.target.value)}
-        />
-    <input type = "file" 
-        className='form-control' 
-        accept="application/pdf" 
-        required
-        onChange={(e)=>setFile(e.target.files[0])}
-        />
-    <button className='btn btn-primary' 
-        type="submit">
-      Submit
-    </button>
-
-  </form>
-</div>
-);
-
-}
-export default App;
-
-*/
-
-
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -59,8 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Mainpage from './components/Mainpage/Mainpage';
 import Sidebar from './components/Mainpage/Sidebar/Sidebar';
-import CreateJobDescription from './components/JobDescription/Create/CreateJobDescription';
-import EditJobDescription from './components/JobDescription/Edit/EditJobDescription';
+//import SubmitForm from './components/SubmitForm/SubmitForm';
 import CandidateFiltering from './components/CandidateFiltering/CandidateFiltering';
 
 function App() {
@@ -81,18 +28,16 @@ function App() {
       <div className='APPA' style={{ overflowY: 'auto', height: '100vh', background:'linear-gradient(359deg, rgb(20 10 44), rgb(27 107 165'}}>
         <Navbar onComponentChange={handleComponentChange} handleResumeUpload={handleResumeUpload} />
         <Sidebar onComponentChange={handleComponentChange} />
-
+   
         <div className="main-content">
           {activeComponent === 'candidateFiltering' && <CandidateFiltering data={resumeData} />}
-          {activeComponent === 'createJob' && <CreateJobDescription />}
-          {activeComponent === 'editJob' && <EditJobDescription />}
+          
           {activeComponent === 'main' && <Mainpage />}
         </div>
 
         <Routes>
           <Route path="/" element={<Mainpage />} />
-          <Route path="/job-description/create" element={<CreateJobDescription />} />
-          <Route path="/job-description/edit" element={<EditJobDescription />} />
+         
         </Routes>
         <div className='App'>
  
@@ -102,4 +47,70 @@ function App() {
   );
 }
 
-export default App; 
+export default App;    
+
+/*
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import Mainpage from "./components/Mainpage/Mainpage";
+import Sidebar from "./components/Mainpage/Sidebar/Sidebar";
+import CandidateFiltering from "./components/CandidateFiltering/CandidateFiltering";
+
+import "./App.css";
+
+function App() {
+  const [activeComponent, setActiveComponent] = useState("main");
+  const [resumeData, setResumeData] = useState([]);
+  const [apiResponse, setApiResponse] = useState(null);
+
+  const handleComponentChange = (component) => setActiveComponent(component);
+  const handleApiResponse = (response) => setApiResponse(response);
+
+  const renderApiResponse = () => {
+    if (!apiResponse) return <p>No data available. Upload files to see results.</p>;
+
+    return (
+      <div className="response-data">
+        <h3>API Response:</h3>
+        <ul>
+          <li><strong>Name:</strong> {apiResponse.name}</li>
+          <li><strong>Email:</strong> {apiResponse.email || "N/A"}</li>
+          <li><strong>Mobile Number:</strong> {apiResponse.mobile_number || "N/A"}</li>
+          <li><strong>Matching Percentage:</strong> {apiResponse["Matching Percentage"] || 0}%</li>
+          <li><strong>Experience:</strong> {apiResponse.experience || "N/A"}</li>
+          <li><strong>Degree:</strong> {apiResponse.degree || "N/A"}</li>
+          <li><strong>Designation:</strong> {apiResponse.designation || "N/A"}</li>
+          <li><strong>Skills:</strong> {apiResponse.skills?.join(", ") || "N/A"}</li>
+          <li><strong>Total Experience:</strong> {apiResponse.total_experience || 0} years</li>
+          <li>
+            <strong>File URL:</strong>{" "}
+            <a href={apiResponse.file_url} target="_blank" rel="noopener noreferrer">
+              View Resume
+            </a>
+          </li>
+        </ul>
+      </div>
+    );
+  };
+
+  return (
+    <Router>
+      <div className="APPA">
+        <Navbar onApiResponse={handleApiResponse} />
+        <Sidebar onComponentChange={handleComponentChange} />
+        <div className="main-content">
+          {activeComponent === "main" && <Mainpage />}
+          {activeComponent === "candidateFiltering" && <CandidateFiltering data={resumeData} />}
+          {renderApiResponse()}
+        </div>
+        <Routes>
+          <Route path="/" element={<Mainpage />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+*/

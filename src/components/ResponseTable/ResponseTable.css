@@ -1,0 +1,28 @@
+/* ResponseTable.css */
+.response-table-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.response-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.response-table th,
+.response-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.response-table th {
+  background-color: #4caf50;
+  color: white;
+}
+
+.response-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}

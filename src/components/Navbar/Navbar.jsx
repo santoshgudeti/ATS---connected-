@@ -1,168 +1,201 @@
-import React, { useRef, useState } from 'react';
-import SMlogo from '../../assets/SMlogo.png';
-import { FaUser, FaEnvelope, FaPhone, FaBuilding, FaCog, FaSignOutAlt, FaSignInAlt } from 'react-icons/fa';
-import './Navbar.css';
-import axios from 'axios';
 
-const Navbar = ({ onComponentChange }) => {
+import React, { useRef, useState } from "react";
+import SMlogo from "../../assets/SMlogo.png";
+import {
+  FaUser,
+  FaEnvelope,
+  FaPhone,
+  FaBuilding,
+  FaCog,
+  FaSignOutAlt,
+  FaSignInAlt,
+} from "react-icons/fa";
+import "./Navbar.css";
+import axios from "axios";
+
+const Navbar = () => {
   const fileInputRef = useRef(null);
+  const jobFileInputRef = useRef(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [selectedJobFiles, setSelectedJobFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [responseData, setResponseData] = useState(null);
 
-  // New Upload Resume Functionality
   const handleFileSelect = (event) => {
-    const file = event.target.files[0];
-    setSelectedFiles(file); // Capture a single file for upload
+    setSelectedFiles(Array.from(event.target.files));
+  };
+
+  const handleJobFileSelect = (event) => {
+    setSelectedJobFiles(Array.from(event.target.files));
   };
 
   const handleUploadClick = () => {
     fileInputRef.current.click();
   };
 
+  const handleJobUploadClick = () => {
+    jobFileInputRef.current.click();
+  };
+
   const handleSubmitFiles = async () => {
-    if (!selectedFiles) {
-      console.warn("No file selected for submission.");
+    if (selectedFiles.length === 0 || selectedJobFiles.length === 0) {
+      console.warn("No files selected for submission.");
       return;
     }
-
+  
     setLoading(true);
-
     try {
       const formData = new FormData();
-      formData.append("title", "Uploaded Resume"); // Example title
-      formData.append("file", selectedFiles);
-
-      const result = await axios.post("http://localhost:5000/upload-files", formData, {
+      selectedFiles.forEach((file) => formData.append("resume", file));
+      selectedJobFiles.forEach((file) => formData.append("job_description", file));
+  
+      const response = await axios.post("http://localhost:5001/api/submit", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-
-      console.log("File submission result:", result);
-      setSelectedFiles(null); // Clear the selected file after upload
+  
+      // Log the full API response to inspect its structure
+      console.log("Full API Response:", response.data);
+  
+      if (response.data && response.data.externalApiResponse) {
+        // Check if externalApiResponse is present
+        const matchingResult = response.data.externalApiResponse;
+        console.log("Matching Result from API:", matchingResult);
+  
+        if (matchingResult && matchingResult["POST Response"]) {
+          const postData = matchingResult["POST Response"];
+          setResponseData(postData); // Set the POST Response data
+        } else {
+          console.error("POST Response missing in the external API response.");
+          setResponseData(null);
+        }
+      } else {
+        console.error("API response structure is incorrect or missing externalApiResponse.");
+        setResponseData(null);
+      }
     } catch (error) {
       console.error("File submission failed:", error);
     } finally {
       setLoading(false);
     }
   };
+  
+  
+  
 
   const toggleProfileMenu = () => {
     setShowProfileMenu((prev) => !prev);
   };
 
+  // Render the API response data
+  const renderResponseData = () => {
+    if (!responseData) {
+      return <p>No response data available.</p>;
+    }
+
+    return (
+      <div className="response-data">
+        <h3>API Response:</h3>
+        <ul>
+          <li><strong>Name:</strong> {responseData.name}</li>
+          <li><strong>Email:</strong> {responseData.email}</li>
+          <li><strong>Mobile Number:</strong> {responseData.mobile_number}</li>
+          <li><strong>Matching Percentage:</strong> {responseData["Matching Percentage"]}%</li>
+          <li><strong>Experience:</strong> {responseData.experience ? responseData.experience.join(", ") : "N/A"}</li>
+          <li><strong>Degree:</strong> {responseData.degree ? responseData.degree.join(", ") : "N/A"}</li>
+          <li><strong>Designation:</strong> {responseData.designation ? responseData.designation.join(", ") : "N/A"}</li>
+          <li><strong>Skills:</strong> {responseData.skills ? responseData.skills.join(", ") : "N/A"}</li>
+          <li><strong>Total Experience:</strong> {responseData.total_experience} years</li>
+          <li><strong>File URL:</strong> <a href={responseData.file_url} target="_blank" rel="noopener noreferrer">View Resume</a></li>
+        </ul>
+      </div>
+    );
+  };
+
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
-        <span>
-          <img
-            style={{
-              height: "70px",
-              width: "70px",
-              marginRight: "30px",
-              objectFit: "cover",
-              border: "3px solid black",
-              borderRadius: "50%",
-            }}
-            src={SMlogo}
-            alt="Logo"
-          />
-        </span>
-
+        <img
+          src={SMlogo}
+          alt="Logo"
+          className="navbar-logo"
+          style={{
+            height: "70px",
+            width: "70px",
+            marginRight: "30px",
+            borderRadius: "50%",
+          }}
+        />
         <div className="navbar-content-container">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Job Description Posting
-              </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <a
-                    className="dropdown-item"
-                    onClick={() => onComponentChange('createJob')}
-                  >
-                    Create Job
-                  </a>
-                </li>
-                <li><hr className="dropdown-divider" /></li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    onClick={() => onComponentChange('editJob')}
-                  >
-                    Edit Job
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            {/* Updated Upload Resume Button */}
-            <button
-              className="upload-resume-button"
-              onClick={handleUploadClick}
-            >
-              Upload Resume
+            <button className="upload-job-button" onClick={handleJobUploadClick}>
+              Upload Job Description
             </button>
-
-            {/* Updated Submit Button */}
             <button
-              className="submit-resume-button btn btn-primary"
+              className="submit-job-button btn btn-primary"
               onClick={handleSubmitFiles}
-              style={{
-                marginLeft: '10px',
-                backgroundColor: '#4CAF50',
-                borderColor: '#4CAF50',
-              }}
               disabled={loading}
+              style={{ marginLeft: "10px", backgroundColor: "#4CAF50" }}
             >
               {loading ? (
                 <>
-                  <span
-                    className="spinner-border spinner-border-sm custom-spinner"
-                    aria-hidden="true"
-                  ></span>
-                  <span className="visually-hidden custom-visually-hidden">Loading...</span>
+                  <span className="spinner-border spinner-border-sm"></span>
+                  Loading...
                 </>
               ) : (
-                'Submit'
+                "Submit Job"
               )}
             </button>
-
+            <button className="upload-resume-button" onClick={handleUploadClick}>
+              Upload Resumes
+            </button>
             <input
               type="file"
               ref={fileInputRef}
-              style={{ display: 'none' }}
+              style={{ display: "none" }}
               onChange={handleFileSelect}
+              multiple
+              accept=".pdf"
+            />
+            <input
+              type="file"
+              ref={jobFileInputRef}
+              style={{ display: "none" }}
+              onChange={handleJobFileSelect}
+              multiple
               accept=".pdf"
             />
           </ul>
         </div>
 
+        {renderResponseData()}
+
         <div className="profile-container" onClick={toggleProfileMenu}>
-          <span
-            style={{ color: "black", fontSize: '20px', fontWeight: 'bold' }}
-            className="profile d-flex align-items-center thick-underline"
-          >
-            <FaUser style={{ marginRight: '10px' }} className="profile-icon" />
+          <span className="profile">
+            <FaUser style={{ marginRight: "10px" }} />
             Profile
           </span>
-
           {showProfileMenu && (
             <div className="profile-menu">
               <ul>
-                <li><FaUser /> Name: Ganga</li>
-                <li><FaEnvelope /> Email: ganga@example.com</li>
-                <li><FaPhone /> Contact: +1234567890</li>
-                <li><FaBuilding /> Company: Example Inc.</li>
-                <li onClick={() => alert('Open Settings')}><FaCog /> Settings</li>
-                <li onClick={() => alert('Sign Out')}><FaSignOutAlt /> Sign Out</li>
-                <li>Or</li>
-                <li onClick={() => alert('Sign in another account')}><FaSignInAlt /> Sign in another account</li>
+                <li>
+                  <FaUser /> Name: Ganga
+                </li>
+                <li>
+                  <FaEnvelope /> Email: ganga@example.com
+                </li>
+                <li>
+                  <FaPhone /> Contact: +1234567890
+                </li>
+                <li>
+                  <FaBuilding /> Company: Example Inc.
+                </li>
+                <li>
+                  <FaCog /> Settings
+                </li>
+                <li>
+                  <FaSignOutAlt /> Sign Out
+                </li>
               </ul>
             </div>
           )}
@@ -173,3 +206,4 @@ const Navbar = ({ onComponentChange }) => {
 };
 
 export default Navbar;
+ 
