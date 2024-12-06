@@ -1,0 +1,319 @@
+/* Full-screen styling */
+.full-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(240, 240, 240, 0.95); /* Light grey background */
+  z-index: 1000;
+  padding: 20px;
+  overflow: hidden;
+}
+
+/* Scrollable container for the table */
+.table-container {
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  margin-top: 20px;
+  
+}
+
+/* Container styling */
+.candidate-filtering-container {
+  margin: 20px auto;
+  padding: 20px;
+  
+  background: radial-gradient(circle at center, 
+  rgb(5, 195, 195), rgb(52, 107, 179), rgb(5, 192, 192)),50% ;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #000000;
+  border: 4px solid black;
+ 
+  border-width: 5px;
+}
+
+.resume-action-view{
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-left: 1px;
+  color:rgb(255, 255, 255);
+  padding: 4px 15px;
+  border:20px;
+  background-color: #000000;
+  margin-bottom:20px;
+  border-radius:30px;
+  
+}
+.resume-action-view:hover{
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-left: 1px;
+  color:rgb(0, 0, 0);
+  padding: 4px 15px;
+  border:20px;
+  background-color: #ffffff;
+  margin-bottom:20px;
+  border-radius:30px;
+}
+.resume-action-download{
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+ 
+  align-items: center;
+  appearance: none;
+  background-color: #3EB2FD;
+  background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
+  background-size: calc(100% + 20px) calc(100% + 20px);
+  border-radius: 100px;
+  border-width: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: CircularStd, sans-serif;
+  font-size: 1rem;
+  height: auto;
+  justify-content: center;
+  line-height: 1.5;
+  margin-top: 10px;
+  padding: 4px 15px;
+  position: relative;
+  text-align: center;
+ 
+
+  transition: background-color .2s, background-position .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+}
+.resume-action-download:hover{
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color:black;  
+  align-items: center;
+  appearance: none;
+  background-color: #3EB2FD;
+  background-image: linear-gradient(1deg, #7b82fd, #55a6db 99%);
+  background-size: calc(100% + 20px) calc(100% + 20px);
+  border-radius: 100px;
+  border-width: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+
+  cursor: pointer;
+  display: inline-flex;
+  font-family: CircularStd, sans-serif;
+  font-size: 1rem;
+  height: auto;
+  justify-content: center;
+  line-height: 1.5;
+  margin-top:10px;
+  padding: 4px 15px;
+  position: relative;
+  text-align: center;
+
+  transition: background-color .2s, background-position .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+/* Input styling */
+.filter-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 30px;
+  border: 3px solid #feffff;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-weight: bold;
+  background-color: #000000;
+}
+
+/* Table styling */
+.candidate-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.candidate-table th {
+  padding: 10px;
+  background: #14213d; /* Darker blue header */
+  color: #ffffff;
+  text-align: left;
+  border: 3px solid #000000;
+  
+}
+.candidate-table th:hover {
+  /* Remove individual cell hover styles if needed */
+  background-color: inherit; /* Let the row hover effect take over */
+  color: inherit; /* Let the row hover effect take over */
+}
+/* Style for table cells */
+.candidate-table td {
+  padding: 10px;
+  text-align: center;
+  border: 3px solid #14213d;
+  background-color: white;
+  color: black;
+}
+
+
+/* Hover effect for the entire row */
+.candidate-table tr:hover {
+  background-color: #000;  /* Black background on hover */
+  color: #fff;  /* White text color on hover */
+ 
+}
+/* Hover effect for the entire row (on td hover, it's more effective to apply to tr) */
+.candidate-table tr:hover td {
+  background-color: rgb(0, 0, 0); /* Black background on hover */
+  color: rgb(255, 247, 247); 
+  border:2px solid white;
+  /* White text color */
+}
+.candidate-table tr:hover th {
+ 
+  border:2px solid white;
+
+  background-color: rgb(0, 0, 0); /* Black background on hover */
+  color: rgb(255, 247, 247); 
+  border:2px solid white;
+  /* White text color */
+}
+
+
+.resume-actions {
+  align-items: center;
+  justify-content: center;
+}
+
+/* Special content styling */
+.content123 {
+  background-color: #9a031e;
+  color: #e5e5e5;
+}
+
+/* Portal background */
+.portal {
+  background-image: url('./path/to/image3.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 200vh;
+}
+.score-circle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px; /* Original size of the circle */
+  height: 100px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for scale and box-shadow */
+}
+
+.score-circle:hover {
+  transform: scale(1.1); /* Only scale the circle size on hover */
+
+}
+
+.background-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    #034854 0% 33%,    /* Dark blue up to 50% */
+    #03203e 33% 66%,   /* Purple from 50% to 80% */
+    #050c5a 66% 100%   /* Light blue from 80% to 100% */
+  );
+  z-index: 0;
+  animation: rotateBackground 10s linear infinite; /* Rotate the background */
+}
+
+@keyframes rotateBackground {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+svg {
+  position: relative;
+  z-index: 1; /* Ensures the SVG stays above the rotating background */
+}
+
+.score-text {
+  position: absolute;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  z-index: 2; /* Highest z-index for text */
+}
+.minimize-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.minimize-button:hover {
+  background-color: #0056b3;
+}
+.filters-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between rows */
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.horizontal-filters {
+  display: flex;
+  justify-content: space-around;
+  gap: 15px; /* Space between filter items */
+  width: 100%;
+}
+
+.filter-item {
+  flex: 1; /* Equal width for all items */
+}
+
+.filter-group label {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.filter-input {
+  width: 100%;
+}
+
+.filter-select {
+  width: 100%;
+}
