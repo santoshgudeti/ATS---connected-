@@ -1,0 +1,17 @@
+
+.header{
+  justify-content: center;
+  text-align: center;
+  padding:50px auto;
+border:3px solid white;
+}
+.header th{
+  padding: 10px;
+  background: #14213d; /* Darker blue header */
+  color: #ffffff;
+  text-align: left;
+  border: 3px solid #000000;
+}
+.header td{
+  border: 3px solid #000000;
+}
