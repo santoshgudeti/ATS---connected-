@@ -13,7 +13,7 @@ const PORT = 5000;
 
 // Middleware
 app.use(cors({ origin: '*' }));
-app.use(bodyParser.json());
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Connect to MongoDB
@@ -61,8 +61,35 @@ app.post('/api/submit', upload.fields([{ name: 'resume' }, { name: 'job_descript
     }
 
     const results = [];
+    const savedJobDescriptions = {}; // Cache for storing already-saved job descriptions
+
+    // Save job descriptions first (only once per unique file)
+    for (const jobDescription of files.job_description) {
+      if (!savedJobDescriptions[jobDescription.originalname]) {
+        const savedJobDescription = new JobDescription({
+          title: jobDescription.originalname,
+          description: jobDescription.buffer,
+          filename: jobDescription.originalname,
+        });
+        await savedJobDescription.save();
+        savedJobDescriptions[jobDescription.originalname] = savedJobDescription._id; // Cache the saved job description ID
+      }
+    }
+
+    // Process resumes and associate with saved job descriptions
     for (const resume of files.resume) {
+      // Save resume to the database
+      const savedResume = new Resume({
+        title: resume.originalname,
+        pdf: resume.buffer,
+        filename: resume.originalname,
+      });
+      await savedResume.save();
+
+      // Use each saved job description to call the external API
       for (const jobDescription of files.job_description) {
+        const jobDescriptionId = savedJobDescriptions[jobDescription.originalname]; // Use cached ID
+
         const formData = new FormData();
         formData.append('resume', resume.buffer, resume.originalname);
         formData.append('job_description', jobDescription.buffer, jobDescription.originalname);
@@ -74,10 +101,10 @@ app.post('/api/submit', upload.fields([{ name: 'resume' }, { name: 'job_descript
             { headers: formData.getHeaders() }
           );
 
-          // Save API response to MongoDB
+          // Save the API response to the database
           const savedResponse = new ApiResponse({
-            resumeId: resume.originalname,
-            jobDescriptionId: jobDescription.originalname,
+            resumeId: savedResume._id,
+            jobDescriptionId: jobDescriptionId,
             matchingResult: apiResponse.data['POST Response'],
           });
           await savedResponse.save();
@@ -93,12 +120,13 @@ app.post('/api/submit', upload.fields([{ name: 'resume' }, { name: 'job_descript
       }
     }
 
-    res.status(200).json({ message: 'Files processed successfully.', results });
+    res.status(200).json({ message: 'Files processed and stored successfully.', results });
   } catch (error) {
     console.error('Error processing files:', error.message);
     res.status(500).json({ error: 'Failed to process files.', details: error.message });
   }
 });
+
 
     
 // Endpoint to serve stored files
