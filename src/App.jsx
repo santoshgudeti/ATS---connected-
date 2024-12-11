@@ -31,11 +31,7 @@ function App() {
     <Router>
       <div
         className="APPA"
-        style={{
-          overflowY: "auto",
-          height: "100vh",
-          background: "linear-gradient(359deg, rgb(20 10 44), rgb(27 107 165))",
-        }}
+       
       >
         {/* Navbar component */}
         <Navbar setResponseData={setResponseData} />

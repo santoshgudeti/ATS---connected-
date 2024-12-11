@@ -116,9 +116,10 @@
 .navbar-content-container {
 
   border-radius: 50px;
-  background: radial-gradient(circle at center, #3828b9, rgb(32 3 70), #130227), 100%;
+
+  background: linear-gradient(268deg, #ffffff, #fffefe);
   text-align: center;
-  max-width: 800px;
+  max-width: 750px;
   margin: 15px auto;
   display: flex;
   box-shadow: 2px 2px 5px rgb(0, 0, 0);
@@ -204,33 +205,23 @@
 }
 
 /* Job Description Page Styles */
-.job-description-page-link {
-  color: white; /* Default color */
-  font-size: 15px;
-}
 
-.job-description-page-link:hover {
-  border: none; /* Remove border */
-  border-radius: 30px; /* Rounded corners */
-  font-weight: bold; /* Make text bold */
-  background-color: rgb(95, 19, 19); /* Change background on hover */
-  color: white; /* Change text color on hover */
-}
+
+
 .upload-job-button{
   border-radius: 60px;
   font-weight: bold;
-  background: linear-gradient(351deg, #0d1c26, #491e43);
-  color: rgb(255, 255, 255);
+  background: linear-gradient(351deg, #4bb7ff, #ff78ec);
+  color: rgb(0 0 0);
   margin-right: 6px;
   padding: 5px 15px;
   border: 2px rgb(255, 236, 236);
-  box-shadow: 2px 2px 3px rgb(193, 205, 209);
+  box-shadow: 2px 2px 3px rgb(0 0 0);
 }
 .upload-job-button:hover{
   border: none;
-  border-radius: 30px;
-  background: linear-gradient(180deg, #0d1c26, #491e43); /* Change to violet on hover */
-  color: white;
+  background: linear-gradient(351deg, #4bb7ff, #ff78ec); /* Change to violet on hover */
+  color: rgb(0, 0, 0);
   transition: 0.9s; 
   border-radius: 30px;
   font-weight: bold;
@@ -238,24 +229,21 @@
   padding-right: 35px;
 }
 .submit-job-button{
-  border: none;
-  border-radius: 30px;
+  border-radius: 60px;
   font-weight: bold;
-  background: linear-gradient(179deg, #4b27a3, #000000);
-  color: white;
-  transition: 0.9s;
-  border-radius: 30px;
-  font-weight: bold;
-  padding-left: 35px;
-  padding-right: 35px;
-  box-shadow: 2px 2px 3px rgb(152, 147, 147);
+  background: linear-gradient(359deg, #62ba60, #9de88f);
+  color: rgb(0 0 0);
+  margin-right: 6px;
+  padding: 5px 15px;
+  border: 2px rgb(255, 236, 236);
+  box-shadow: 2px 2px 3px rgb(0, 0, 0);
 }
 .submit-job-button:hover{
   border: none;
   border-radius: 30px;
   font-weight: bold;
-  background: linear-gradient(360deg, #4b27a3, #000000);
-  color: white;
+  background: linear-gradient(359deg, #62ba60, #9de88f);
+  color: rgb(0, 0, 0);
   transition: 0.9s;
   border-radius: 30px;
   font-weight: bold;
@@ -265,54 +253,28 @@
 /* Button Styles */
 .upload-resume-button {
  /* Remove border */
- margin-left: 20px;
  border-radius: 60px;
  font-weight: bold;
- background: linear-gradient(351deg, #0d1c26, #491e43);
- color: rgb(255, 255, 255);
- margin-right: 6px;
+ background: linear-gradient(351deg, #4bb7ff, #ff78ec);
+ color: rgb(0 0 0);
+ margin-right: 1px;
+ margin-left: 10px;
  padding: 5px 15px;
  border: 2px rgb(255, 236, 236);
- box-shadow: 2px 2px 3px rgb(193, 205, 209);
+ box-shadow: 2px 2px 3px rgb(0 0 0);
 }
 
 .upload-resume-button:hover {
   border: none;
   border-radius: 30px;
-  background: linear-gradient(180deg, #0d1c26, #491e43); /* Change to violet on hover */
-  color: white;
+  background: linear-gradient(351deg, #4bb7ff, #ff78ec); /* Change to violet on hover */
+  color: rgb(0, 0, 0);
   transition: 0.9s; 
   border-radius: 30px;
   font-weight: bold;
   padding-left: 35px;
   padding-right: 35px;
 
-}
-.submit-resume-button{
-  border: none;
-  border-radius: 30px;
-  font-weight: bold;
-  background: linear-gradient(179deg, #4b27a3, #000000);
-  color: white;
-  transition: 0.9s;
-  border-radius: 30px;
-  font-weight: bold;
-  padding-left: 35px;
-  padding-right: 35px;
-  box-shadow: 2px 2px 3px rgb(152, 147, 147);
-} /* Add padding for better click area */
-
-.submit-resume-button:hover{
-  border: none;
-  border-radius: 30px;
-  font-weight: bold;
-  background: linear-gradient(360deg, #4b27a3, #000000);
-  color: white;
-  transition: 0.9s;
-  border-radius: 30px;
-  font-weight: bold;
-  padding-left: 35px;
-  padding-right: 35px;
 }
 
 /* Navbar.css */

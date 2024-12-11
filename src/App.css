@@ -1,1 +1,6 @@
 /* App.css */
+.APPA{
+  overflow-y: auto;
+  height: 100vh;
+  background: linear-gradient(359deg, rgb(68, 157, 220), rgb(204 0 255));
+}

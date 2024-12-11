@@ -26,7 +26,7 @@ const Sidebar = ({ onComponentChange, activeComponent }) => {
   return (
     <div className="sidebar">
       <button onClick={toggleSidebar} className="menu-button">
-        <FontAwesomeIcon icon={faBars} />
+        <FontAwesomeIcon icon={faBars} className="menu-icon" /> MENU
       </button>
 
       {isSidebarOpen && (

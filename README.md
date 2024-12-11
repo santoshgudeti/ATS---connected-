@@ -23,4 +23,12 @@ npm audit fix
 npm install mongoose dotenv
 npm install dotenv
 npm install express mongoose multer cors body-parser dotenv
+npm install socket.io-client
+
+
+
+
+///server/js///
+ npm install socket.io
+npm install crypto
 

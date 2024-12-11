@@ -12,3 +12,10 @@ const ApiResponseSchema = new Schema({
   },
   createdAt: { type: Date, default: Date.now },
 });
+
+// Add compound index to avoid duplicate resume-jobDescription pairs
+ApiResponseSchema.index({ resumeId: 1, jobDescriptionId: 1 }, { unique: true });
+
+const ApiResponse = mongoose.model('ApiResponse', ApiResponseSchema);
+
+module.exports = ApiResponse;

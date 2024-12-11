@@ -1,50 +1,61 @@
 
 
 /*Candidate Filtering Styles */
-
+.menu-icon {
+  margin-right: 10px; /* Add space between the icon and the text */
+  font-size: 18px;   /* Adjust icon size if necessary */
+}
 .menu-button{
+ display: flex; /* Ensures icon and text are side by side */
+  justify-content: center; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
   border-radius: 60px;
-  background-color: none;
-  font-weight: bold;
-  background-color: rgb(60, 69, 163);
-  color: rgb(255, 255, 255);
+  background: linear-gradient(147deg, #fdfdfd, #f4f4f4);
+  color: rgb(0, 0, 0);
   margin-left: 15px;
-  padding: 5px 15px; 
-  border:2px  rgb(255, 236, 236);
+  padding: 10px 20px; 
+  border: none;
   box-shadow: 3px 3px 3px rgb(12, 4, 4);
-  width:60px;
+  font-weight: bold;
+  width: auto; /* Adjust width dynamically based on content */
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 .menu-button:hover {
   border: none;
   border-radius: 30px;
   font-weight: bold;
-  box-shadow: 3px 3px 3px rgb(255, 255, 255);
-  background-color: rgb(60, 69, 163);
+  box-shadow: 3px 3px 3px rgb(161, 161, 161);
+  background: linear-gradient(147deg, #000000, #000000);
   color: #ffffff;
-  transition: 0.6s;
+  transition: 0.2s;
   cursor:pointer;
   
 }
 .sidebar-content {
   border-radius: 60px;
   font-weight: bold;
-  background: linear-gradient(90deg, 6349b8, #130348);
+
   color: rgb(255, 255, 255);
+  background-color: rgb(17, 20, 48);
+  
   margin-right: 6px;
+  margin-top:10px;
   padding: 5px 15px; 
   border:1px rgb(255, 236, 236);
-  box-shadow: 2px 2px 5px rgb(12, 6, 6);
+  box-shadow: 2px 2px 3px rgb(139, 133, 133);
   width:200px;
+  border:none;
 } 
 .sidebar-content:hover {
   border: none;
   border-radius: 30px;
   font-weight: bold;
-  background: linear-gradient(90deg, 6349b8, #130348);
-  background-color: rgb(17, 20, 48);
+
+  background-color: rgb(47, 57, 144);
   color: #ffffff;
   box-shadow: 2px 2px 3px rgb(255, 255, 255);
-  transition: 0.6s;
+  transition: 0.2s;
   cursor:pointer;
  
 }
