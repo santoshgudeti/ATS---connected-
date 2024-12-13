@@ -24,6 +24,9 @@ npm install mongoose dotenv
 npm install dotenv
 npm install express mongoose multer cors body-parser dotenv
 npm install socket.io-client
+npm install material-react-table socket.io-client
+npm install material-react-table @mui/material @emotion/react @emotion/styled
+
 
 
 

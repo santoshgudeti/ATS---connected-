@@ -1,4 +1,3 @@
-
 import React, { useRef, useState } from "react";
 import SMlogo from "../../assets/SMlogo.png";
 import {
@@ -19,7 +18,6 @@ const Navbar = ({ setResponseData }) => {
   const [selectedJobFiles, setSelectedJobFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-
 
   const handleFileSelect = (event) => {
     setSelectedFiles(Array.from(event.target.files));
@@ -71,98 +69,98 @@ const Navbar = ({ setResponseData }) => {
     }
   };
 
-  return (
-    <nav className="navbar navbar-expand-lg">
-      <div className="container-fluid">
-        <img
-          src={SMlogo}
-          alt="Logo"
-          className="navbar-logo"
-          style={{
-            height: "70px",
-            width: "70px",
-            marginRight: "30px",
-            borderRadius: "50%",
-          }}
-        />
-        <div className="navbar-content-container">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <button className="upload-job-button" onClick={handleJobUploadClick}>
-              Upload Job Description
-            </button>
-            <button
-              className="submit-job-button btn btn-primary"
-              onClick={handleSubmitFiles}
-              disabled={loading}
-              style={{ marginLeft: "10px", backgroundColor: "#4CAF50" }}
-            >
-              {loading ? (
-                <>
-                  <span className="spinner-border spinner-border-sm"></span>
-                  Loading...
-                </>
-              ) : (
-                "Submit Job"
-              )}
-            </button>
-            <button className="upload-resume-button" onClick={handleUploadClick}>
-              Upload Resumes
-            </button>
-            <input
-              type="file"
-              ref={fileInputRef}
-              style={{ display: "none" }}
-              onChange={handleFileSelect}
-              multiple
-              accept=".pdf"
-            />
-            <input
-              type="file"
-              ref={jobFileInputRef}
-              style={{ display: "none" }}
-              onChange={handleJobFileSelect}
-              multiple
-              accept=".pdf"
-            />
-          </ul>
-        </div>
 
-        <div className="profile-container" onClick={toggleProfileMenu}>
-          <span className="profile">
-            <FaUser style={{ marginRight: "10px" }} />
-            Profile
-          </span>
-          {showProfileMenu && (
-            <div className="profile-menu">
-              <ul>
-                <li>
-                  <FaUser /> Name: Ganga
-                </li>
-                <li>
-                  <FaEnvelope /> Email: ganga@example.com
-                </li>
-                <li>
-                  <FaPhone /> Contact: +1234567890
-                </li>
-                <li>
-                  <FaBuilding /> Company: Example Inc.
-                </li>
-                <li>
-                  <FaCog /> Settings
-                </li>
-                <li>
-                  <FaSignOutAlt /> Sign Out
-                </li>
-              </ul>
-            </div>
-          )}
+    return (
+      <nav className="navbar navbar-expand-lg navbar-light">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="#">
+            <img src={SMlogo} alt="Logo" className="navbar-logo" />
+          </a>
+  
+          <div className="navbar-collapse">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <button className="upload-job-button" onClick={handleJobUploadClick}>
+                  Upload Job Description
+                </button>
+              </li>
+              <li className="nav-item">
+                <button
+                  className="submit-job-button btn btn-primary"
+                  onClick={handleSubmitFiles}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <span className="spinner-border spinner-border-sm"></span>
+                      Loading...
+                    </>
+                  ) : (
+                    "Submit Job"
+                  )}
+                </button>
+              </li>
+              <li className="nav-item">
+                <button className="upload-resume-button" onClick={handleUploadClick}>
+                  Upload Resumes
+                </button>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  style={{ display: "none" }}
+                  onChange={handleFileSelect}
+                  multiple
+                  accept=".pdf"
+                />
+                <input
+                  type="file"
+                  ref={jobFileInputRef}
+                  style={{ display: "none" }}
+                  onChange={handleJobFileSelect}
+                  multiple
+                  accept=".pdf"
+                />
+              </li>
+            </ul>
+          </div>
+  
+          <div className="profile-container" onClick={toggleProfileMenu}>
+            <span className="profile">
+              <FaUser style={{ marginRight: "10px" }} />
+              Profile
+            </span>
+            {showProfileMenu && (
+              <div className="profile-menu">
+                <ul>
+                  <li>
+                    <FaUser /> Name: Ganga
+                  </li>
+                  <li>
+                    <FaEnvelope /> Email: ganga@example.com
+                  </li>
+                  <li>
+                    <FaPhone /> Contact: +1234567890
+                  </li>
+                  <li>
+                    <FaBuilding /> Company: Example Inc.
+                  </li>
+                  <li>
+                    <FaCog /> Settings
+                  </li>
+                  <li>
+                    <FaSignOutAlt /> Sign Out
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </nav>
-  );
-};
-
-export default Navbar;
+      </nav>
+    );
+  };
+  
+  export default Navbar;
+  
 
 
 /*   
