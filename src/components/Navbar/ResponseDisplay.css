@@ -37,11 +37,11 @@
   text-align: center;
   font-size: 50px;
   margin-bottom: 20px;
-  color:rgb(34, 211, 84);
+  color:rgb(0, 0, 0);
 
   
   text-decoration: underline;
-text-decoration-color: #24c52c;
+text-decoration-color: #000000;
 text-underline-offset: 8px; 
 
 }
@@ -70,8 +70,9 @@ text-underline-offset: 8px;
   align-items: center;
   justify-items: center;
   justify-content: center;
-  background-color: #83b0e8;
-  color:black;
+  background: transparent;
+  color:rgb(255, 251, 251);
+  font-weight: bold;
 
 
 }

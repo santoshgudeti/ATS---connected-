@@ -39,7 +39,9 @@ const CandidateFiltering = () => {
   useEffect(() => {
     const fetchCandidates = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/candidate-filtering");
+        const response = await fetch(
+          "http://localhost:5000/api/candidate-filtering"
+        );
         const data = await response.json();
 
         const uniqueCandidates = data.filter((candidate, index, self) => {
@@ -101,132 +103,111 @@ const CandidateFiltering = () => {
   };
 
   const isCandidateSelected = (id) =>
-    selectedCandidates.some((candidate) => candidate.id === id);
+    selectedCandidates.some((candidate) => candidate._id === id);
 
   const toggleCandidateSelection = (id) => {
     setSelectedCandidates((prev) => {
-      const exists = prev.some((candidate) => candidate.id === id);
+      const exists = prev.some((candidate) => candidate._id === id);
       if (exists) {
-        // Remove the candidate from selection
-        return prev.filter((candidate) => candidate.id !== id);
+        return prev.filter((candidate) => candidate._id !== id);
       } else {
-        // Add the candidate to selection
-        const candidate = candidates.find((c) => c.id === id);
+        const candidate = candidates.find((c) => c._id === id);
         return candidate ? [...prev, candidate] : prev;
       }
     });
   };
-  
 
   const selectTop = (count) => {
     const topCandidates = sortedCandidates.slice(0, count);
     const alreadySelected = topCandidates.every((candidate) =>
-      isCandidateSelected(candidate.id)
+      isCandidateSelected(candidate._id)
     );
-  
+
     if (alreadySelected) {
-      // Unselect all top candidates
       setSelectedCandidates((prev) =>
         prev.filter(
           (candidate) =>
-            !topCandidates.some((topCandidate) => topCandidate.id === candidate.id)
+            !topCandidates.some((topCandidate) => topCandidate._id === candidate._id)
         )
       );
     } else {
-      // Select only the top candidates not already selected
       setSelectedCandidates((prev) => [
         ...prev,
         ...topCandidates.filter(
           (topCandidate) =>
-            !prev.some((candidate) => candidate.id === topCandidate.id)
+            !prev.some((candidate) => candidate._id === topCandidate._id)
         ),
       ]);
     }
   };
-  
+
   const handleUserDefinedSelection = () => {
     const count = parseInt(userDefinedTop, 10);
     if (!isNaN(count) && count > 0 && count <= sortedCandidates.length) {
-      const selectedSubset = sortedCandidates.slice(0, count);
-      const alreadySelected = selectedSubset.every((candidate) =>
-        isCandidateSelected(candidate.id)
-      );
-  
-      if (alreadySelected) {
-        // Unselect user-defined top N candidates
-        setSelectedCandidates((prev) =>
-          prev.filter(
-            (candidate) =>
-              !selectedSubset.some((subCandidate) => subCandidate.id === candidate.id)
-          )
-        );
-      } else {
-        // Select user-defined top N candidates
-        setSelectedCandidates((prev) =>
-          [...prev, ...selectedSubset].filter(
-            (candidate, index, self) =>
-              self.findIndex((c) => c.id === candidate.id) === index // Avoid duplicates
-          )
-        );
-      }
+      selectTop(count);
     }
   };
-  
+
   const handleDownload = () => {
-    const selectedResumes = selectedCandidates.map((candidate) => candidate.matchingResult?.file_url);
+    const selectedResumes = selectedCandidates.map(
+      (candidate) => candidate.matchingResult?.file_url
+    );
   
     if (selectedResumes.length === 0) {
       console.log("No resumes selected for download.");
       return;
     }
   
-    selectedResumes.forEach((url, index) => {
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `resume_${index + 1}.pdf`; // You can adjust the filename format
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+    selectedResumes.forEach((url) => {
+      if (url) {
+        const newTab = window.open(url, "_blank", "noopener,noreferrer");
+        if (!newTab) {
+          console.error("Failed to open a new tab. Please check browser settings.");
+        }
+      }
     });
   
-    console.log("Download triggered for resumes:", selectedResumes);
+    console.log("Resumes opened in new tabs:", selectedResumes);
   };
   
 
   return (
-    <div className={`table-container CandidateFiltering ${isFullScreen ? "fullscreen" : ""}`}>
+    <div
+      className={`table-container CandidateFiltering ${
+        isFullScreen ? "fullscreen" : ""
+      }`}
+    >
       <div className="table-header">
         <h3>All Candidates Results</h3>
         <div className="controls">
-          <button onClick={() => setIsSelectionMode(!isSelectionMode)}>
+          <button className="Selection" onClick={() => setIsSelectionMode(!isSelectionMode)}>
             {isSelectionMode ? "Cancel Selection" : "Select Resumes"}
           </button>
           {isSelectionMode && (
             <>
-              <button onClick={() => selectTop(10)}>
+              <button 
+              className="Select10"
+              onClick={() => selectTop(10)}>
                 {sortedCandidates
                   .slice(0, 10)
-                  .every((candidate) => isCandidateSelected(candidate.id))
+                  .every((candidate) => isCandidateSelected(candidate._id))
                   ? "Unselect Top 10"
                   : "Select Top 10"}
               </button>
               <input
+              className="NUMBER"
                 type="number"
                 placeholder="Enter number"
                 value={userDefinedTop}
                 onChange={(e) => setUserDefinedTop(e.target.value)}
               />
-              <button onClick={handleUserDefinedSelection}>
-                {userDefinedTop &&
-                sortedCandidates
-                  .slice(0, parseInt(userDefinedTop, 10))
-                  .every((candidate) => isCandidateSelected(candidate.id))
-                  ? `Unselect Top ${userDefinedTop}`
-                  : `Select Top ${userDefinedTop}`}
+              <button className="select-topN"onClick={handleUserDefinedSelection}>
+                Submit {userDefinedTop || " "}
               </button>
               <button
                 className="downloadselected"
                 onClick={handleDownload}
+                
                 disabled={selectedCandidates.length === 0}
               >
                 Download Resumes
@@ -276,8 +257,8 @@ const CandidateFiltering = () => {
                   <td>
                     <input
                       type="checkbox"
-                      checked={isCandidateSelected(candidate.id)}
-                      onChange={() => toggleCandidateSelection(candidate.id)}
+                      checked={isCandidateSelected(candidate._id)}
+                      onChange={() => toggleCandidateSelection(candidate._id)}
                     />
                   </td>
                 )}
@@ -286,21 +267,33 @@ const CandidateFiltering = () => {
                 <td className="email-column">
                   {candidate.matchingResult?.email || "N/A"}
                 </td>
-                <td>{candidate.matchingResult?.total_experience || "0"} years</td>
+                <td>
+                  {candidate.matchingResult?.total_experience || "0"} years
+                </td>
                 <td>{candidate.matchingResult?.mobile_number || "N/A"}</td>
                 <td>
                   {candidate.matchingResult?.skills?.length
-                    ? renderListWithExpand(candidate.matchingResult.skills, index, "skills")
+                    ? renderListWithExpand(
+                        candidate.matchingResult.skills,
+                        index,
+                        "skills"
+                      )
                     : "N/A"}
                 </td>
                 <td>
                   {candidate.matchingResult?.designation?.length
-                    ? renderListWithExpand(candidate.matchingResult.designation, index, "designation")
+                    ? renderListWithExpand(
+                        candidate.matchingResult.designation,
+                        index,
+                        "designation"
+                      )
                     : "N/A"}
                 </td>
                 <td>{candidate.matchingResult?.degree || "N/A"}</td>
                 <td>{candidate.matchingResult?.company_names || "N/A"}</td>
-                <td>{candidate.matchingResult?.["Matching Percentage"] || "0"}%</td>
+                <td>
+                  {candidate.matchingResult?.["Matching Percentage"] || "0"}%
+                </td>
                 <td>
                   <a
                     href={candidate.matchingResult?.file_url || "#"}
@@ -312,9 +305,10 @@ const CandidateFiltering = () => {
                   </a>
                   <br />
                   <a
-                    href={candidate.matchingResult?.file_url || "#"}
-                    download
-                    className="download-link"
+                   href={candidate.matchingResult?.file_url || "#"}
+                   target="_blank"  
+                   rel="noopener noreferrer"
+                   className="download-link"
                   >
                     Download
                   </a>
@@ -329,7 +323,6 @@ const CandidateFiltering = () => {
 };
 
 export default CandidateFiltering;
-
 
 
 

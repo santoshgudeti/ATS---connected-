@@ -84,6 +84,9 @@ const Navbar = ({ setResponseData }) => {
                   Upload Job Description
                 </button>
               </li>
+              <button className="upload-resume-button" onClick={handleUploadClick}>
+                  Upload Resumes
+                </button>
               <li className="nav-item">
                 <button
                   className="submit-job-button btn btn-primary"
@@ -101,9 +104,7 @@ const Navbar = ({ setResponseData }) => {
                 </button>
               </li>
               <li className="nav-item">
-                <button className="upload-resume-button" onClick={handleUploadClick}>
-                  Upload Resumes
-                </button>
+               
                 <input
                   type="file"
                   ref={fileInputRef}
@@ -117,7 +118,7 @@ const Navbar = ({ setResponseData }) => {
                   ref={jobFileInputRef}
                   style={{ display: "none" }}
                   onChange={handleJobFileSelect}
-                  multiple
+                  
                   accept=".pdf"
                 />
               </li>

@@ -1,5 +1,68 @@
 
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+ 
+}
+.Selection{
+  font-weight: bold;
+  background: linear-gradient(20deg, rgb(165 93 246), rgb(145 191 255), #0d6efd);
+  color: rgb(0 0 0);
+  border: 2px solid #0d053e;
+  border-radius: 20px;
+  font-size: 14px;
+}
+.Select10{
+  font-weight: bold;
+  border:2px solid black;
+  border-radius: 20px;
+  background: transparent;
+  opacity: 0.8;
+  
+  font-size: 14px;
+}
+.NUMBER{
+  font-weight: bold;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+ 
+    border-radius: 10px;
+  font-size: 14px;
+  opacity: 0.3;
+  border: none;
+  
+}
+.NUMBER:hover{
+  border:none;
+}
+.NUMBERplaceholder{
+  color: rgb(0, 0, 0);
+}
+.select-topN{
+  font-weight: bold;
+  border:2px solid black;
+  border-radius: 25px;
+  background-color: black;
+    color:white;
+  font-size: 14px;
+  
 
+}
+
+.downloadselected{
+  background: linear-gradient(171deg, #99ff99, #03b800);
+  border-radius:20px ;
+  border:none;
+  color:rgb(0, 0, 0);
+  font-size: 15px;
+  font-weight: bolder;
+  cursor: pointer;
+}
+.downloadselected:hover{
+  background:white ;
+
+}
 
 .screen-toggle {
   background-color: #000000; /* Blue background for the button */
@@ -29,14 +92,7 @@
   font-size: 18px; /* Adjust icon size */
 }
 
-.downloadselected{
-  background: linear-gradient(171deg, #99ff99, #03b800);
-  border-radius:20px ;
-  border:none;
-  color:rgb(0, 0, 0);
-  font-size: 15px;
-  font-weight: bolder;
-}
+
 
 .fullscreen {
   position: fixed;
@@ -50,16 +106,7 @@
   
 }
 
-.controls {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
 
-input[type="number"] {
-  width: 100px;
-  padding: 5px;
-}
 
 
 
@@ -71,11 +118,11 @@ input[type="number"] {
 
 .CandidateFiltering h3 {
   text-align: center;
-  font-size: 35px;
+  font-size: 50px;
   margin-bottom: 20px;
   color:rgb(255, 255, 255);
   background: linear-gradient(180deg, #322e2e, #000000);
-  width: 500px;
+  width: 700px;
   box-shadow: 3px 3px 3px rgb(174, 168, 168);
   border-radius: 20px;
   margin:20px auto;
@@ -327,4 +374,74 @@ text-underline-offset: 8px;  */
 .rd2 td:nth-child(8),
 .rd2 td:nth-child(9) {
   max-width: 180px;
+}
+  .CandidateFiltering h3 {
+    font-size:20px;
+    width:250px;
+   }
+   
+  
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+   
+  }
+  .Selection{
+    font-weight: bold;
+    background: linear-gradient(20deg, rgb(165 93 246), rgb(145 191 255), #0d6efd);
+    color: rgb(0 0 0);
+    border: 2px solid #0d053e;
+    border-radius: 20px;
+    font-size: 14px;
+  }
+  .Select10{
+    font-weight: bold;
+    border:2px solid black;
+    border-radius: 20px;
+    background: transparent;
+    opacity: 0.8;
+    
+    font-size: 14px;
+  }
+  .NUMBER{
+    font-weight: bold;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+   
+      border-radius: 10px;
+    font-size: 14px;
+    opacity: 0.3;
+    border: none;
+    
+  }
+  .NUMBER:hover{
+    border:none;
+  }
+  .NUMBERplaceholder{
+    color: rgb(0, 0, 0);
+  }
+  .select-topN{
+    font-weight: bold;
+    border:2px solid black;
+    border-radius: 25px;
+    background-color: black;
+      color:white;
+    font-size: 14px;
+    
+  
+  }
+  
+  .downloadselected{
+    background: linear-gradient(171deg, #99ff99, #03b800);
+    border-radius:20px ;
+    border:none;
+    color:rgb(0, 0, 0);
+    font-size: 15px;
+    font-weight: bolder;
+    cursor: pointer;
+  }
+  .downloadselected:hover{
+    background:white ;
+  
 }
